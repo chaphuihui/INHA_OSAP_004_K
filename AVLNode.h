@@ -1,5 +1,5 @@
-#ifndef AVLNODE_H
-#define AVLNODE_H
+#ifndef AVLNODE_H_
+#define AVLNODE_H_
 
 struct AVLNode {
     int key;
@@ -10,4 +10,4 @@ struct AVLNode {
     AVLNode(int k);
 };
 
-#endif AVLNODE_H
+#endif AVLNODE_H_
