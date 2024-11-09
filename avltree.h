@@ -20,7 +20,7 @@ public:
 
 
 private:
-    AVLNode* DdeleteNode(AVLNode* node, int key);
+    AVLNode* DeleteNode(AVLNode* node, int key);
     AVLNode* Insert(AVLNode* node, int key);
     AVLNode* root_;
 
