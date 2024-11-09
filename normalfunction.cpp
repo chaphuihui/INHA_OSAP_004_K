@@ -1,6 +1,6 @@
-#include "AVLTree.h"
-#include "Utility.h"
-#include "Insertion.cpp"
+#include "avltree.h"
+#include "utility.h"
+#include "insertion.cpp"
 
 void AVLTree::Insert(int key) { root = Insert(root, key); };
 bool AVLTree::Empty() {};
