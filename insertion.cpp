@@ -1,5 +1,5 @@
-#include"AVLTree.h"
-#include"Utility.h"
+#include "avltree.h"
+#include "utility.h"
 
 AVLNode* AVLTree::Insert(AVLNode* node, int key) {
     if (!node)
@@ -34,5 +34,3 @@ AVLNode* AVLTree::Insert(AVLNode* node, int key) {
 
     return node;
 };
-
-void AVLTree::Insert(int key) { root = Insert(root, key); };
