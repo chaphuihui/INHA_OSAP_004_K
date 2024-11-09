@@ -1,6 +1,6 @@
-#include "AVLTree.h"
-#include "Utility.h"
-#include "Deletion.cpp"
+#include "avltree.h"
+#include "utility.h"
+#include "deletion.cpp"
 
 void AVLTree::Rank() {};
 void AVLTree::Erase(int key) { deleteNode(root, key); };
