@@ -1,21 +1,21 @@
-#include<iostream>
-#include<algorithm>
-#include"AVLNode.h"
-#include"Utility.h"
+#include <iostream>
+#include <algorithm>
+#include "AVLNode.h"
+#include "Utility.h"
 
 
-int Utility::getHeight(AVLNode* node) {
+int Utility::GetHeight(AVLNode* node) {
     if (node != NULL) return node->height;
     else return 0;
 };
 
-int Utility::updateHeight(AVLNode* node) {
-    return 1 + std::max(getHeight(node->left), getHeight(node->right));
+int Utility:UpdateHeight(AVLNode* node) {
+    return 1 + std::max(GetHeight(node->left), GetHeight(node->right));
 };
 
-int Utility::getBalance(AVLNode* node) {
+int Utility::GetBalance(AVLNode* node) {
     if (node != NULL) {
-        return getHeight(node->left) - getHeight(node->right);
+        return GetHeight(node->left) - GetHeight(node->right);
     }
     else {
         return 0;
@@ -23,4 +23,4 @@ int Utility::getBalance(AVLNode* node) {
 };
 
 
-AVLNode* Utility::minValueNode(AVLNode* node) {};
+AVLNode* Utility::MinValueNode(AVLNode* node) {};
