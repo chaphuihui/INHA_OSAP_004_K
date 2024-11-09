@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
-#include "AVLNode.h"
-#include "Utility.h"
+#include "avlnode.h"
+#include "utility.h"
 
 
 int Utility::GetHeight(AVLNode* node) {
