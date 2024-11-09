@@ -1,5 +1,5 @@
-#include"AVLTree.h"
-#include"Utility.h"
+#include "avltree.h"
+#include "utility.h"
 
 AVLNode* AVLTree::DeleteNode(AVLNode* root, int key) {
     if (!root)
