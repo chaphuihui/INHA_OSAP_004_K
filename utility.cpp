@@ -22,11 +22,18 @@ int Utility::GetBalance(AVLNode* node) {
     }
 };
 
-
 AVLNode* Utility::MinValueNode(AVLNode* node) {
     AVLNode* current_node = node;
     while (current_node->left != NULL) {
         current_node = current_node->left;
+    }
+    return current_node;
+};
+
+AVLNode* AVLTree::MaxValueNode(AVLNode* node) {
+    AVLNode* current_node = node;
+    while (current_node->right != NULL) {
+        current_node = current_node->right;
     }
     return current_node;
 };
