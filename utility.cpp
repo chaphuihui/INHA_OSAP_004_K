@@ -23,4 +23,10 @@ int Utility::GetBalance(AVLNode* node) {
 };
 
 
-AVLNode* Utility::MinValueNode(AVLNode* node) {};
+AVLNode* Utility::MinValueNode(AVLNode* node) {
+    AVLNode* current_node = node;
+    while (current_node->left != NULL) {
+        current_node = current_node->left;
+    }
+    return current_node;
+};
