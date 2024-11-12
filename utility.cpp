@@ -5,7 +5,7 @@
 
 
 int Utility::GetHeight(AVLNode* node) {
-    if (node != NULL) return node->height;
+    if (node != nullptr) return node->height;
     else return 0;
 };
 
@@ -14,7 +14,7 @@ int Utility:UpdateHeight(AVLNode* node) {
 };
 
 int Utility::GetBalance(AVLNode* node) {
-    if (node != NULL) {
+    if (node != nullptr) {
         return GetHeight(node->left) - GetHeight(node->right);
     }
     else {
@@ -22,5 +22,18 @@ int Utility::GetBalance(AVLNode* node) {
     }
 };
 
+AVLNode* Utility::MinValueNode(AVLNode* node) {
+    AVLNode* current_node = node;
+    while (current_node->left != nullptr) {
+        current_node = current_node->left;
+    }
+    return current_node;
+};
 
-AVLNode* Utility::MinValueNode(AVLNode* node) {};
+AVLNode* AVLTree::MaxValueNode(AVLNode* node) {
+    AVLNode* current_node = node;
+    while (current_node->right != nullptr) {
+        current_node = current_node->right;
+    }
+    return current_node;
+};
