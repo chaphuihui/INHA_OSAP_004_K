@@ -30,7 +30,7 @@ AVLNode* Utility::MinValueNode(AVLNode* node) {
     return current_node;
 };
 
-AVLNode* AVLTree::MaxValueNode(AVLNode* node) {
+AVLNode* Utility::MaxValueNode(AVLNode* node) {
     AVLNode* current_node = node;
     while (current_node->right != nullptr) {
         current_node = current_node->right;
