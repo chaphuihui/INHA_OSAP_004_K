@@ -9,7 +9,7 @@ int AVLTree::Height() {};
 void AVLTree::Ancester() {};
 
 void AVLTree::Average(int key) {
-  AVLNode* subtree_root = FindNode(root_, key);
+  AVLNode* subtree_root = Find(root_, key);
 
   int min_value_key = MinValueNode(subtree_root)->key;
   int max_value_key = MaxValueNode(subtree_root)->key;
