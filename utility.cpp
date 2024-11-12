@@ -37,3 +37,15 @@ AVLNode* AVLTree::MaxValueNode(AVLNode* node) {
     }
     return current_node;
 };
+
+AVLNode* Utility::FindNode(AVLNode* root, int key) {
+    AVLNode* current_node = root;
+    while (current_node != nullptr && current_node->key != key) {
+        if (key < current_node->key) {
+            current_node = current_node->left;
+        } else {
+            current_node = current_node->right;
+        }
+    }
+    return current_node;
+};

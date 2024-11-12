@@ -10,6 +10,6 @@ public:
     int GetBalance(AVLNode* node);
     AVLNode* MinValueNode(AVLNode* root);
     AVLNode* MaxValueNode(AVLNode* root);
-
+    AVLNode* FindNode(AVLNode* root, int key);
 };
 #endif UTILITY_H_
