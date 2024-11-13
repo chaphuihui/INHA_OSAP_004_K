@@ -2,7 +2,7 @@
 #include "utility.h"
 #include "deletion.cpp"
 
-void AVLTree::Rank(AVLNode* node, int key) {
+int AVLTree::Rank(AVLNode* node, int key) {
    if (!node)
    {
        return 0;
