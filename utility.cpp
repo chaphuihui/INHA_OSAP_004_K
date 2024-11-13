@@ -9,7 +9,7 @@ int Utility::GetHeight(AVLNode* node) {
     else return 0;
 };
 
-int Utility:UpdateHeight(AVLNode* node) {
+int Utility::UpdateHeight(AVLNode* node) {
     return 1 + std::max(GetHeight(node->left), GetHeight(node->right));
 };
 
@@ -30,10 +30,22 @@ AVLNode* Utility::MinValueNode(AVLNode* node) {
     return current_node;
 };
 
-AVLNode* AVLTree::MaxValueNode(AVLNode* node) {
+AVLNode* Utility::MaxValueNode(AVLNode* node) {
     AVLNode* current_node = node;
     while (current_node->right != nullptr) {
         current_node = current_node->right;
+    }
+    return current_node;
+};
+
+AVLNode* Utility::FindNode(AVLNode* root, int key) {
+    AVLNode* current_node = root;
+    while (current_node != nullptr && current_node->key != key) {
+        if (key < current_node->key) {
+            current_node = current_node->left;
+        } else {
+            current_node = current_node->right;
+        }
     }
     return current_node;
 };
