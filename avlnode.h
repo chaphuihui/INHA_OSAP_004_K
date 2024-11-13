@@ -6,6 +6,7 @@ struct AVLNode {
     AVLNode* left;
     AVLNode* right;
     int height;
+    int size;
 
     AVLNode(int k);
 };
