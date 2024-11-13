@@ -9,7 +9,7 @@ int Utility::GetHeight(AVLNode* node) {
     else return 0;
 };
 
-int Utility:UpdateHeight(AVLNode* node) {
+int Utility::UpdateHeight(AVLNode* node) {
     return 1 + std::max(GetHeight(node->left), GetHeight(node->right));
 };
 
