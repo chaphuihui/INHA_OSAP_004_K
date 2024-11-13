@@ -13,6 +13,7 @@ AVLNode* AVLTree::Insert(AVLNode* node, int key) {
         return node;
 
     node->height = UpdateHeight(node);
+    node->size = UpdateSize(node);
 
     int balance = GetBalance(node);
 
