@@ -9,9 +9,23 @@ int Utility::GetHeight(AVLNode* node) {
     else return 0;
 };
 
+int Utility::GetSize(AVLNode* node) {
+    if (node != NULL){
+        return node->size;
+    }
+    else {
+        return 0;
+    }
+};
+
 int Utility::UpdateHeight(AVLNode* node) {
     return 1 + std::max(GetHeight(node->left), GetHeight(node->right));
 };
+
+int Utility::UpdateSize(AVLNode* node) 
+{
+    return 1 + getSize(node->left) + getSize(node->right);
+}
 
 int Utility::GetBalance(AVLNode* node) {
     if (node != nullptr) {
@@ -48,4 +62,36 @@ AVLNode* Utility::FindNode(AVLNode* root, int key) {
         }
     }
     return current_node;
+
+AVLNode* Utility::LeftRotate(AVLNode* x) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+    
+    y->left = x;
+    x->right = T2;
+    
+    x->height = updateHeight(x);
+    y->height = updateHeight(y);
+    
+    x->size = getSize(x);
+    y->size = getSize(y);
+
+    return y;
+}
+
+AVLNode* Utility::RightRotate(AVLNode* y) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+    
+    y->left = x;
+    x->right = T2;
+    
+    x->height = updateHeight(x);
+    y->height = updateHeight(y);
+    
+    x->size = getSize(x);
+    y->size = getSize(y);
+
+    return x;
+}
 };
