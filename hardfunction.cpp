@@ -26,4 +26,4 @@ int AVLTree::Rank(int key) {
    }
 };
 
-void AVLTree::Erase(int key) { deleteNode(root, key); };
+void AVLTree::Erase(int key) { DeleteNode(root, key); };
