@@ -2,7 +2,11 @@
 #include "utility.h"
 #include "deletion.cpp"
 
-int AVLTree::Rank(AVLNode* node, int key) {
+int AVLTree::Rank(int key) {
+   
+    Utility util;
+    AVLNode* node = util.FindNode(root_, key);
+   
    if (!node)
    {
        return 0;
@@ -10,15 +14,15 @@ int AVLTree::Rank(AVLNode* node, int key) {
   
    if (key < node->key)
    {
-       return rank(node->left, key);
+       return Rank(node->left, key);
    }
    else if (key > node->key) 
    {
-       return 1 + GetSize(node->left) + rank(node->right, key);
+       return 1 + util.GetSize(node->left) + Rank(node->right, key);
    }
    else 
    {
-       return getSize(node->left) + 1;
+       return util.GetSize(node->left) + 1;
    }
 };
 
