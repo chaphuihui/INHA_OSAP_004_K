@@ -13,7 +13,7 @@ public:
     int Height();
     void Ancester();
     void Average();
-    int Rank(AVLNode* node, int key);
+    int Rank(int key);
     void Erase(int key);
     bool Find(int key);
   
