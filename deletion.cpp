@@ -29,31 +29,31 @@ AVLNode* AVLTree::DeleteNode(AVLNode* root, int key) {
             return root;
         }
     
-        node->height = UpdateHeight(node);
-        node->size = GetSize(node);
+        node->height = UpdateHeight(root);
+        node->size = GetSize(root);
         
-        int balance = GetBalance(node);
+        int balance = GetBalance(root);
         
-        if (balance > 1 && GetBalance(node->left) >= 0)
+        if (balance > 1 && GetBalance(root->left) >= 0)
         {
-            return RightRotate(node);
+            return RightRotate(root);
         }
     
-        if (balance > 1 && GetBalance(node->left) < 0)
+        if (balance > 1 && GetBalance(root->left) < 0)
         {
-            node->left = LeftRotate(node->left);
-            return RightRotate(node);
+            node->left = LeftRotate(root->left);
+            return RightRotate(root);
         }
     
-        if (balance < -1 && GetBalance(node->right) <= 0)
+        if (balance < -1 && GetBalance(root->right) <= 0)
         {
-            return LeftRotate(node);
+            return LeftRotate(root);
         }
         
-        if (balance < -1 && GetBalance(node->right) > 0)
+        if (balance < -1 && GetBalance(root->right) > 0)
         {
-            node->right = RightRotate(node->right);
-            return LeftRotate(node);
+            node->right = RightRotate(root->right);
+            return LeftRotate(root);
         }
         
         return root;
