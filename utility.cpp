@@ -10,7 +10,7 @@ int Utility::GetHeight(AVLNode* node) {
 };
 
 int Utility::GetSize(AVLNode* node) {
-    if (node != NULL){
+    if (node != nullptr){
         return node->size;
     }
     else {
@@ -24,8 +24,8 @@ int Utility::UpdateHeight(AVLNode* node) {
 
 int Utility::UpdateSize(AVLNode* node) 
 {
-    return 1 + getSize(node->left) + getSize(node->right);
-}
+    return 1 + GetSize(node->left) + GetSize(node->right);
+};
 
 int Utility::GetBalance(AVLNode* node) {
     if (node != nullptr) {
@@ -62,6 +62,7 @@ AVLNode* Utility::FindNode(AVLNode* root, int key) {
         }
     }
     return current_node;
+};
 
 AVLNode* Utility::LeftRotate(AVLNode* x) {
     Node* y = x->right;
@@ -70,28 +71,28 @@ AVLNode* Utility::LeftRotate(AVLNode* x) {
     y->left = x;
     x->right = T2;
     
-    x->height = updateHeight(x);
-    y->height = updateHeight(y);
+    x->height = UpdateHeight(x);
+    y->height = UpdateHeight(y);
     
-    x->size = getSize(x);
-    y->size = getSize(y);
+    x->size = GetSize(x);
+    y->size = GetSize(y);
 
     return y;
-}
+};
 
 AVLNode* Utility::RightRotate(AVLNode* y) {
-    Node* y = x->right;
-    Node* T2 = y->left;
+    AVLNode* x = y->left;
+    AVLNode* T2 = x->right;
     
-    y->left = x;
-    x->right = T2;
+    x->left = y;
+    y->right = T2;
     
-    x->height = updateHeight(x);
-    y->height = updateHeight(y);
+    y->height = UpdateHeight(y);
+    x->height = UpdateHeight(x);
     
-    x->size = getSize(x);
-    y->size = getSize(y);
-
+    y->size = GetSize(y);
+    x->size = GetSize(x);
+    
+    
     return x;
-}
 };
