@@ -1,28 +1,37 @@
-#ifndef AVLTREE_H_
-#define AVLTREE_H_
+#ifndef AVLTREE_H
+#define AVLTREE_H
+#include "Include.h"
 
-#include "AVLNode.h"
+struct AVLNode {
+	int key;
+	AVLNode* left;
+	AVLNode* right;
+	int height;
+	int size;
 
-class AVLTree {
+	AVLNode(int k) : key(k), left(nullptr), right(nullptr), height(1), size(1) {};
+};
+
+
+class AVLTree
+{
 public:
-    AVLTree();
-    ~AVLTree();
-    void Insert(int key);
-    bool Empty();
-    int Size();
-    int Height();
-    void Ancester();
-    void Average();
-    void Rank();
-    void Erase(int key);
-    bool Find(int key);
-  
-
+	AVLTree();
+	~AVLTree();
+	void Insert(int key);
+	bool Empty();
+	int Size();
+	void Height();
+	void Ancester();
+	void Average(int key);
+	int Rank(int key);
+	void Erase(int key);
+	void Find(int key);
 
 private:
-    AVLNode* DeleteNode(AVLNode* node, int key);
-    AVLNode* Insert(AVLNode* node, int key);
-    AVLNode* root_;
-
+	AVLNode* DeleteNode(AVLNode* node, int key);
+	AVLNode* InsertNode(AVLNode* node, int key);
+	AVLNode* root_;
 };
-#endif //AVLTREE_H_
+
+#endif //AVLTREE_H
