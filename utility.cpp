@@ -14,6 +14,10 @@
  * limitations under the License.
  *
  * Authors:
+ *   Who: Hwang minjun 
+ *   Date: 2024/11/12
+ *   Description: added the 'MinValueNode' function and the 'MaxValueNode' function
+ *
  * - Who: Kim Dowon 
  *   Date: 2024/11/13
  *   Description: added the 'FindeNode' function
@@ -96,10 +100,10 @@ AVLNode* Utility::MinValueNode(AVLNode* node)
 	return current_node;
 };
 
-AVLNode* Utility::MaxValueNode(AVLNode* node)
+AVLNode* Utility::MaxValueNode(AVLNode* node)			 		   
 {
 	AVLNode* current_node = node;
-	while (current_node->right != nullptr)
+	while (current_node->right != nullptr)		
 	{
 		current_node = current_node->right;
 	}
