@@ -9,8 +9,8 @@
 #include <algorithm>
 
 
-#include "AVLtree.h"
-#include "Utility.h"
+#include "avltree.h"
+#include "utility.h"
 
 
 
