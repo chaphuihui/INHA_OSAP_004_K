@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * - Who: Kim Dowon
+ * Authors:
+ *   Who: Hwang minjun
+ *   Date: 2024/11/13
+ *   Description: Added the `Average` function.
+ *
+ *   Who: Kim Dowon
  *   Date: 2024/11/17
  *   Description: Added the `Ancestor` function.
  *
