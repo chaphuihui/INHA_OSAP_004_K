@@ -1,6 +1,6 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
-#include "Include.h"
+#include "include.h"
 
 struct AVLNode {
 	int key;
