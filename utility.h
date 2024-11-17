@@ -1,6 +1,6 @@
 #ifndef UTILITY_H
 #define UTILITY_H
-#include "AVLtree.h"
+#include "avltree.h"
 
 class Utility
 {
