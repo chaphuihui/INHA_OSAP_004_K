@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2024 INHA_OSAP_003_K
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * - Who: Kim Dowon
+ *   Date: 2024/11/17
+ *   Description: Added the `Ancestor` function.
+ *
+ */
+
 #include "include.h"
 
 
@@ -33,31 +54,31 @@ void AVLTree::Ancestor(int key) {
     Utility util;
     AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
 
-    int sum = 0;                                       
+    int sum = 0;  // 조상 노드들의 키 값의 합                                 
     AVLNode* current_node = root_;
 
-    while (current_node->key != key) 
+    while (current_node->key != key)  // 타켓 노드에 도달할 때까지 루트부터 탐색
     {
-        sum += current_node->key;
+        sum += current_node->key;     // 조상 노드의 키 값을 합산
         if (key < current_node->key) 
         {
-            current_node = current_node->left;
+            current_node = current_node->left;  // 키 값이 작으면 왼쪽 자식으로 이동
         }
         else 
         {
-            current_node = current_node->right;
+            current_node = current_node->right;  // 키 값이 크면 오른쪽 자식으로 이동
         }
     }
 
-    int K = Find(key);
+    int K = Find(key);  // 깊이와 높이의 합
 
-    if (target_node == root_) 
+    if (target_node == root_)  // 타겟 노드가 루트일 경우 "K 0" 출력
     {      
         std::cout << "K 0" << "\n";  
     }
-    else 
+    else                       
     {
-         std::cout << K << " " << sum << "\n";
+         std::cout << K << " " << sum << "\n";  // K 값과 조상 노드들의 키 값들의 합을 출력 
     }
 };
 
