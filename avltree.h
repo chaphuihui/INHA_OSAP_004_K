@@ -22,7 +22,7 @@ public:
 	bool Empty();
 	int Size();
 	void Height();
-	void Ancester();
+	void Ancestor(int key);
 	void Average(int key);
 	int Rank(int key);
 	void Erase(int key);

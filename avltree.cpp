@@ -29,9 +29,36 @@ void AVLTree::Height()
 	else { cout << root_->height << "\n"; }
 };
 
-void AVLTree::Ancester()
-{
-	cout << "none";
+void AVLTree::Ancestor(int key) {
+    Utility util;
+    AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
+
+    int sum = 0;                                       
+    AVLNode* current_node = root_;
+
+    while (current_node->key != key) 
+    {
+        sum += current_node->key;
+        if (key < current_node->key) 
+        {
+            current_node = current_node->left;
+        }
+        else 
+        {
+            current_node = current_node->right;
+        }
+    }
+
+    int K = Find(key);
+
+    if (target_node == root_) 
+    {      
+        std::cout << "K 0" << "\n";  
+    }
+    else 
+    {
+         std::cout << K << " " << sum << "\n";
+    }
 };
 
 void AVLTree::Average(int key)
