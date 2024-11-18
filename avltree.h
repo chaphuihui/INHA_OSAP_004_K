@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * - Who: Kim Dowon
+ *Authors:
+ *   Who: Hwang minjun
+ *   Date: 2024/11/13
+ *   Description: Added the `Average` function.
+ * 
+ *	 Who: Kim Dowon
  *   Date: 2024/11/17
  *   Description: Added the `Ancestor` function.
  *
@@ -44,7 +49,7 @@ public:
 	int Size();
 	void Height();
 	void Ancestor(int key); // 노드 key의 깊이와 높이의 합, key의 부모로부터 루트까지의 경로들의 key값들의 합 출력 
-	void Average(int key);
+	void Average(int key);  // 입력 받은 키 값을 루트로 하는 서브트리에 대한 최대 최소의 평균을 출력
 	int Rank(int key);
 	void Erase(int key);
 	void Find(int key);

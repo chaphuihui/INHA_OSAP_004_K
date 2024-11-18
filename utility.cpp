@@ -93,7 +93,7 @@ int Utility::GetBalance(AVLNode* node)
 AVLNode* Utility::MinValueNode(AVLNode* node)
 {
 	AVLNode* current_node = node;
-	while (current_node->left != nullptr)
+	while (current_node->left != nullptr)				//nullptr을 만날때까지 서브트리의 왼쪽으로 이동
 	{
 		current_node = current_node->left;
 	}
@@ -103,7 +103,7 @@ AVLNode* Utility::MinValueNode(AVLNode* node)
 AVLNode* Utility::MaxValueNode(AVLNode* node)			 		   
 {
 	AVLNode* current_node = node;
-	while (current_node->right != nullptr)		
+	while (current_node->right != nullptr)			//nullptr을 만날때까지 서브트리의 오른쪽으로 이동
 	{
 		current_node = current_node->right;
 	}
