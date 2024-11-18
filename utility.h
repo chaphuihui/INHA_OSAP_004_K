@@ -39,7 +39,7 @@ public:
 	int UpdateHeight(AVLNode* node);
 	int UpdateSize(AVLNode* node);
 	int GetBalance(AVLNode* node);
-	AVLNode* MinValueNode(AVLNode* root);			  // 루트를 입력받아 서브트리의 가장 작은 노드 반환
+	AVLNode* MinValueNode(AVLNode* root);	    // 루트를 입력받아 서브트리의 가장 작은 노드 반환
 	AVLNode* MaxValueNode(AVLNode* root);       // 루트를 입력받아 서브트리의 가장 큰 노드 반환
 	AVLNode* FindNode(AVLNode* root, int key);  // 키 값이 일치하는 노드의 포인터 반환
 	AVLNode* LeftRotate(AVLNode* x);
