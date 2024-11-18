@@ -18,7 +18,7 @@
  *   Date: 2024/11/13
  *   Description: Added the `Average` function.
  * 
- *	 Who: Kim Dowon
+ *   Who: Kim Dowon
  *   Date: 2024/11/17
  *   Description: Added the `Ancestor` function.
  *
