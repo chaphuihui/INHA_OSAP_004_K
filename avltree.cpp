@@ -90,12 +90,12 @@ void AVLTree::Ancestor(int key) {
 void AVLTree::Average(int key)
 {
 	Utility util;
-	AVLNode* subtree_root = util.FindNode(root_, key);
+	AVLNode* subtree_root = util.FindNode(root_, key);								//입력 받은 키 값의 노드 찾기
 
-	int min_value_key = util.MinValueNode(subtree_root)->key;
-	int max_value_key = util.MaxValueNode(subtree_root)->key;
+	int min_value_key = util.MinValueNode(subtree_root)->key;					//노드를 기준으로한 서브트리의 최소노드
+	int max_value_key = util.MaxValueNode(subtree_root)->key;					//노드를 기준으로한 서브트리의 최대노드
 
-	double subtree_min_max_average = (static_cast<double>(min_value_key) + static_cast<double>(max_value_key)) / 2.0;
+	double subtree_min_max_average = (static_cast<double>(min_value_key) + static_cast<double>(max_value_key)) / 2.0;			//최대와 최소의 산술평균
 	cout << subtree_min_max_average << "\n";
 };
 
