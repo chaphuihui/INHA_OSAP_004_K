@@ -60,19 +60,19 @@ void AVLTree::Ancestor(int key)
         Utility util;
 	AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
 
-        if (target_node == root_)                          // 타겟 노드가 루트일 경우 "K 0" 출력
+	int height = target_node->height - 1;
+        int depth = util.GetDepth(root_, key, 0);
+        int K = height + depth;      // 타겟 노드의 높이와 깊이의 합
+
+        if (target_node == root_)    // 타겟 노드가 루트일 경우 "K 0" 출력
         {
-                std::cout << "K 0" << "\n";
+                std::cout << K << " 0" << "\n";
                 return;
         }
-
-        int height = target_node->height - 1;
-        int depth = util.GetDepth(root_, key, 0);
-        int K = height + depth;           // 타겟 노드의 높이와 깊이의 합
-
+	
         int sum = 0;  
         AVLNode* current_node = root_;
-	while (current_node->key != key)  // 타켓 노드에 도달할 때까지 루트부터 탐색   
+	while (current_node->key != key)      // 타켓 노드에 도달할 때까지 루트부터 탐색   
 	{
 	        sum += current_node->key;     // 조상 노드의 키 값을 합산
 		if (key < current_node->key) 
