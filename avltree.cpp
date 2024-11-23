@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 INHA_OSAP_003_K
+ * Copyright (C) 2024 INHA_OSAP_004_K
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,50 +50,52 @@ int AVLTree::Size()
 
 void AVLTree::Height()
 {
-	Utility util;
+        Utility util;
 	if (root_ == nullptr) { cout << -1 << "\n"; }
 	else { cout << root_->height << "\n"; }
 };
 
-void AVLTree::Ancestor(int key) {
-    Utility util;
-    AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
+void AVLTree::Ancestor(int key) 
+{
+        Utility util;
+	AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
 
-    int sum = 0;  // 조상 노드들의 키 값의 합                                 
-    AVLNode* current_node = root_;
+	int height = target_node->height - 1;
+        int depth = util.GetDepth(root_, key, 0);
+        int K = height + depth;      // 타겟 노드의 높이와 깊이의 합
 
-    while (current_node->key != key)  // 타켓 노드에 도달할 때까지 루트부터 탐색
-    {
-        sum += current_node->key;     // 조상 노드의 키 값을 합산
-        if (key < current_node->key) 
+        if (target_node == root_)    // 타겟 노드가 루트일 경우 "K 0" 출력
         {
-            current_node = current_node->left;  // 키 값이 작으면 왼쪽 자식으로 이동
+                std::cout << K << " 0" << "\n";
+                return;
         }
-        else 
-        {
-            current_node = current_node->right;  // 키 값이 크면 오른쪽 자식으로 이동
+	
+        int sum = 0;  
+        AVLNode* current_node = root_;
+	while (current_node->key != key)      // 타켓 노드에 도달할 때까지 루트부터 탐색   
+	{
+	        sum += current_node->key;     // 조상 노드의 키 값을 합산
+		if (key < current_node->key) 
+                {
+		        current_node = current_node->left;  // 키 값이 작으면 왼쪽 자식으로 이동
+	        }
+	        else 
+                {
+		        current_node = current_node->right; // 키 값이 크면 오른쪽 자식으로 이동
+		}
         }
-    }
 
-    int K = Find(key);  // 깊이와 높이의 합
-
-    if (target_node == root_)  // 타겟 노드가 루트일 경우 "K 0" 출력
-    {      
-        std::cout << "K 0" << "\n";  
-    }
-    else                       
-    {
-         std::cout << K << " " << sum << "\n";  // K 값과 조상 노드들의 키 값들의 합을 출력 
-    }
+        std::cout << K << " " << sum << "\n"; // K 값과 조상 노드들의 키 값의 합을 출력  
+	
 };
 
 void AVLTree::Average(int key)
 {
 	Utility util;
-	AVLNode* subtree_root = util.FindNode(root_, key);								//입력 받은 키 값의 노드 찾기
+	AVLNode* subtree_root = util.FindNode(root_, key);  //입력 받은 키 값의 노드 찾기
 
-	int min_value_key = util.MinValueNode(subtree_root)->key;					//노드를 기준으로한 서브트리의 최소노드
-	int max_value_key = util.MaxValueNode(subtree_root)->key;					//노드를 기준으로한 서브트리의 최대노드
+	int min_value_key = util.MinValueNode(subtree_root)->key;  //노드를 기준으로한 서브트리의 최소노드
+	int max_value_key = util.MaxValueNode(subtree_root)->key;  //노드를 기준으로한 서브트리의 최대노드
 
 	double subtree_min_max_average = (static_cast<double>(min_value_key) + static_cast<double>(max_value_key)) / 2.0;			//최대와 최소의 산술평균
 	cout << subtree_min_max_average << "\n";
@@ -112,7 +114,7 @@ int AVLTree::Rank(int key)
 
 	if (key < node->key)
 	{
-		return Rank(key);
+	        return Rank(key);
 	}
 	else if (key > node->key)
 	{
@@ -179,7 +181,7 @@ AVLNode* AVLTree::DeleteNode(AVLNode* root, int key)
 		}
 		else
 		{
-			AVLNode* temp = util.MinValueNode(root->right);
+		        AVLNode* temp = util.MinValueNode(root->right);
 			root->key = temp->key;
 			root->right = DeleteNode(root->right, temp->key);
 		}
