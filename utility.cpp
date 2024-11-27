@@ -17,13 +17,7 @@
  *   Who: Hwang minjun 
  *   Date: 2024/11/12
  *   Description: added the 'MinValueNode' function and the 'MaxValueNode' function
- * 
- *   Who: PAK DENIS
- *   Date: 2024/11/12
- *   Description: added the 'LeftRotate' function and the 'RightRotate' function
- * 		  added the 'GetSize' function and the 'UpdateSize' function
- *		  added the 'GetDepth' function and the 'RankNode' function
- * 
+ *
  * - Who: Kim Dowon 
  *   Date: 2024/11/13
  *   Description: added the 'FindeNode' function
@@ -52,27 +46,25 @@ int Utility::GetHeight(AVLNode* node)
 };
 
 int Utility::GetDepth(AVLNode* node, int key, int current_depth) {
-	if (node == nullptr) return -1; // 노드가 비어 있으면 -1 반환
+	if (!node) return -1;
 
-	if (key == node->key) return current_depth; // 키가 현재 노드의 키와 같으면 현재 깊이를 반환
-	if (key < node->key) 
-	{
-		return GetDepth(node->left, key, current_depth + 1);   // 키가 현재 노드의 키보다 작으면 왼쪽 서브트리에서 탐색
+	if (key == node->key) return current_depth;
+	if (key < node->key) {
+		return GetDepth(node->left, key, current_depth + 1);
 	}
-	else 
-	{
-		return GetDepth(node->right, key, current_depth + 1);  // 키가 현재 노드의 키보다 크면 오른쪽 서브트리에서 탐색
+	else {
+		return GetDepth(node->right, key, current_depth + 1);
 	}
 }
 
 int Utility::GetSize(AVLNode* node) {
 	if (node != nullptr)
 	{
-		return node->size;  // 노드가 존재하면 해당 노드의 크기 반환
+		return node->size;
 	}
 	else
 	{
-		return 0;  // 노드가 없으면 0 반환
+		return 0;
 	}
 };
 
@@ -83,7 +75,7 @@ int Utility::UpdateHeight(AVLNode* node)
 
 int Utility::UpdateSize(AVLNode* node)
 {
-	return 1 + GetSize(node->left) + GetSize(node->right);  // 서브트리의 크기 = 1 (자기 자신) + 왼쪽 서브트리 크기 + 오른쪽 서브트리 크기
+	return 1 + GetSize(node->left) + GetSize(node->right);
 }
 
 int Utility::GetBalance(AVLNode* node)
@@ -140,61 +132,37 @@ AVLNode* Utility::FindNode(AVLNode* root, int key)
 AVLNode* Utility::LeftRotate(AVLNode* x)
 {
 
-	AVLNode* y = x->right;  // x의 오른쪽 자식을 저장합니다 (새로운 서브트리 루트가 될 노드)
-	AVLNode* T2 = y->left;  // y의 왼쪽 자식을 저장합니다 (x의 오른쪽 자식이 될 노드)
+	AVLNode* y = x->right;
+	AVLNode* T2 = y->left;
 
-	// 회전 수행					
 	y->left = x;
 	x->right = T2;
 
-	// 높이 갱신
 	x->height = UpdateHeight(x);
 	y->height = UpdateHeight(y);
 
-	// 크기 갱신
 	x->size = GetSize(x);
 	y->size = GetSize(y);
 
-	return y;  // 새로운 루트 반환
+	return y;
 }
 
 
 AVLNode* Utility::RightRotate(AVLNode* y)
 {
 
-	AVLNode* x = y->left;	 // y의 왼쪽 자식을 저장합니다 (새로운 서브트리 루트가 될 노드)	
-	AVLNode* T2 = x->right;  // x의 오른쪽 자식을 저장합니다 (y의 왼쪽 자식이 될 노드)
+	AVLNode* x = y->left;
+	AVLNode* T2 = x->right;
 
-	// 회전 수행
-	x->right = y;
-	y->left = T2;
+	x->left = y;
+	y->right = T2;
 
-	// 높이 갱신
 	y->height = UpdateHeight(y);
 	x->height = UpdateHeight(x);
 
-	// 크기 갱신
 	y->size = GetSize(y);
 	x->size = GetSize(x);
 
 
-	return x;  // 새로운 루트 반환
+	return x;
 }
-
-int Utility::RankNode(AVLNode* node, int key) 
-{
-	if (node == nullptr) return 0;  // 노드가 비어 있으면 0 반환
-
-	if (key < node->key)
-	{
-		return RankNode(node->left, key);  // 키가 현재 노드의 키보다 작으면 왼쪽 서브트리에서 탐색
-	}
-	else if (key > node->key)
-	{
-		return 1 + GetSize(node->left) + RankNode(node->right, key);  // 왼쪽 서브트리와 현재 노드의 개수를 더함
-	}
-	else
-	{
-		return GetSize(node->left);   // 키가 현재 노드의 키와 같으면 왼쪽 서브트리의 크기를 반환
-	}
-};

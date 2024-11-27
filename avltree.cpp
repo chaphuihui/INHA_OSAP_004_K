@@ -18,10 +18,6 @@
  *   Date: 2024/11/13
  *   Description: Added the `Average` function.
  *
- *   Who: PAK DENIS
- *   Date: 2024/11/16
- *   Description: Added the `Rank` function.
- *
  *   Who: Kim Dowon
  *   Date: 2024/11/17
  *   Description: Added the `Ancestor` function.
@@ -52,13 +48,11 @@ int AVLTree::Size()
 	return util.GetSize(root_);
 };
 
-int AVLTree::Height(int key)
+void AVLTree::Height()
 {
         Utility util;
-	AVLNode* node = util.FindNode(root_, key);
-	if (node == nullptr)
-		return -1;
-	return node->height;
+	if (root_ == nullptr) { cout << -1 << "\n"; }
+	else { cout << root_->height << "\n"; }
 };
 
 void AVLTree::Ancestor(int key) 
@@ -107,24 +101,28 @@ void AVLTree::Average(int key)
 	cout << subtree_min_max_average << "\n";
 };
 
-void AVLTree::Rank(int key)
+int AVLTree::Rank(int key)
 {
 	Utility util;
 	AVLNode* node = util.FindNode(root_, key);
 
 
-		if (node == nullptr) 
-	{ 
-		cout << 0 << endl;  //노드를 찾을 수 없으면 "0"을 인쇄하고 기능을 완료한다.
+	if (!node)
+	{
+		return 0;
+	}
+
+	if (key < node->key)
+	{
+	        return Rank(key);
+	}
+	else if (key > node->key)
+	{
+		return 1 + util.GetSize(node->left) + Rank(key);
 	}
 	else
 	{
-		int height = Height(key) - 1; 		  //`key` 키를 사용하여 노드의 높이를 계산한다. 높이를 올바른 논리로 가져오려면 1을 뺍니다(루트의 높이가 1인 경우).
-		int depth = util.GetDepth(root_, key, 0); //노드의 깊이를 계산한다. 우리는 `GetDepth` 메소드를 사용한다. 이 메소드는 루트에서 주어진 키를 가진 노드까지의 레벨 수를 반환한다.
-		int rank = util.RankNode(root_, key) + 1; //`RankNode` 메서드를 사용하여 키 `key`를 가진 노드의 랭크를 계산한다. "0" 대신 "1"로 시작하는 랭크를 얻으려면 1을 더한다.
-		int sumHD = height + depth; 		  //전체 측정항목을 얻기 위해 노드의 높이와 깊이를 합산한다.
-	
-		cout << sumHD << " " << rank  << "\n";    //결과를 출력한다
+		return util.GetSize(node->left) + 1;
 	}
 };
 
@@ -147,7 +145,7 @@ void AVLTree::Find(int key)
 	else {
 		int height = node->height - 1;
 		int depth = util.GetDepth(root_, key, 0);
-		cout << "Find: " << key << " Height: " << height << ", Depth: " << depth << "\n";
+		cout << height << "\n";
 	}
 
 };
