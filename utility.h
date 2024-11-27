@@ -18,10 +18,16 @@
  *   Date: 2024/11/12
  *   Description: added the 'MinValueNode' function and the 'MaxValueNode' function
  * 
- * - Who: Kim Dowon 
+ *   Who: PAK DENIS
+ *   Date: 2024/11/12
+ *   Description: added the 'LeftRotate' function and the 'RightRotate' function
+ * 		  added the 'GetSize' function and the 'UpdateSize' function
+ *		  added the 'GetDepth' function and the 'RankNode' function
+ * 
+ * - Who: Kim Dowon
  *   Date: 2024/11/13
  *   Description: added the 'FindeNode' function
- *
+ * 
  */
 
 #ifndef UTILITY_H
@@ -33,17 +39,18 @@ class Utility
 public:
 	Utility();
 	~Utility();
-	int GetHeight(AVLNode* node);
-	int GetDepth(AVLNode* node, int key, int currentDepth);
-	int GetSize(AVLNode* node);
-	int UpdateHeight(AVLNode* node);
-	int UpdateSize(AVLNode* node);
+	int GetHeight(AVLNode* node);		    
+	int GetDepth(AVLNode* node, int key, int currentDepth);  // GetDepth 함수는 주어진 키를 가진 노드의 깊이를 계산한다
+	int GetSize(AVLNode* node);		    // GetSize 함수는 특정 노드를 루트로 하는 서브트리의 크기를 반환한다
+	int UpdateHeight(AVLNode* node);		
+	int UpdateSize(AVLNode* node);		    // UpdateSize 함수는 특정 노드의 서브트리 크기를 다시 계산한다
 	int GetBalance(AVLNode* node);
+	int RankNode(AVLNode* node, int key);       // RankNode 함수는 주어진 키를 가진 노드의 순위를 계산한
 	AVLNode* MinValueNode(AVLNode* root);	    // 루트를 입력받아 서브트리의 가장 작은 노드 반환
 	AVLNode* MaxValueNode(AVLNode* root);       // 루트를 입력받아 서브트리의 가장 큰 노드 반환
 	AVLNode* FindNode(AVLNode* root, int key);  // 키 값이 일치하는 노드의 포인터 반환
-	AVLNode* LeftRotate(AVLNode* x);
-	AVLNode* RightRotate(AVLNode* y);
+	AVLNode* LeftRotate(AVLNode* x);	    // LeftRotate는 오른쪽 서브트리가 더 클 때 트리를 균형있게 조정하는 작업이다
+	AVLNode* RightRotate(AVLNode* y);	    // RightRotate는 왼쪽 서브트리가 더 클 때 트리를 균형있게 조정하는 작업이다
 };
 
 #endif //UTILITY_H
