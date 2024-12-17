@@ -21,7 +21,7 @@
  *   Who: PAK DENIS
  *   Date: 2024/11/12
  *   Description: added the 'LeftRotate' function and the 'RightRotate' function
- * 		  added the 'GetSize' function and the 'UpdateSize' function
+ * 		  added the 'GetRankSize' function and the 'UpdateRankSize' function
  *		  added the 'GetDepth' function and the 'RankNode' function
  * 
  * - Who: Kim Dowon
@@ -37,14 +37,14 @@
 class Utility
 {
 public:
-	Utility();
-	~Utility();
-	int GetHeight(AVLNode* node);		    
+	Utility();				    // 생성자: Utility 객체를 생성할 때 호출됨
+	~Utility();				    // 소멸자: Utility 객체가 소멸될 때 호출됨
+	int GetHeight(AVLNode* node);		    // GetHeight 함수: 주어진 노드의 높이를 반환
 	int GetDepth(AVLNode* node, int key, int currentDepth);  // GetDepth 함수는 주어진 키를 가진 노드의 깊이를 계산한다
-	int GetSize(AVLNode* node);		    // GetSize 함수는 특정 노드를 루트로 하는 서브트리의 크기를 반환한다
-	int UpdateHeight(AVLNode* node);		
-	int UpdateSize(AVLNode* node);		    // UpdateSize 함수는 특정 노드의 서브트리 크기를 다시 계산한다
-	int GetBalance(AVLNode* node);
+	int GetRankSize(AVLNode* node);		    // GetRankSize 함수는 특정 노드를 루트로 하는 서브트리의 크기를 반환한다
+	int UpdateHeight(AVLNode* node);	    // UpdateHeight 함수: 주어진 노드의 높이를 갱신하고 반환
+	int UpdateRankSize(AVLNode* node);	    // UpdateRankSize 함수는 특정 노드의 서브트리 크기를 다시 계산한다
+	int GetBalance(AVLNode* node);		    // GetBalance 함수: 주어진 노드의 균형 인덱스를 계산하여 반환
 	int RankNode(AVLNode* node, int key);       // RankNode 함수는 주어진 키를 가진 노드의 순위를 계산한
 	AVLNode* MinValueNode(AVLNode* root);	    // 루트를 입력받아 서브트리의 가장 작은 노드 반환
 	AVLNode* MaxValueNode(AVLNode* root);       // 루트를 입력받아 서브트리의 가장 큰 노드 반환
