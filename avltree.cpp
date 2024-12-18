@@ -62,7 +62,7 @@ void AVLTree::Size() const	// 트리의 노드 개수(크기)를 출력하는 �
 	cout << size_ << "\n";  // 트리의 노드 수인 size_를 출력
 };
 
-void AVLTree::Height(int key)	// 트리의 높이를 출력하는 함수
+void AVLTree::Height()	// 트리의 높이를 출력하는 함수
 {
 	if (root_ == nullptr)
 	{
