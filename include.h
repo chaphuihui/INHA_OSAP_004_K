@@ -15,8 +15,8 @@
  *
  * Authors:
  * - Who: 
- *   Date: 2024/11/
- *   Description: 
+ *   Date: 2024/11/16
+ *   Description: This file was created.
  *
  */
 
@@ -24,16 +24,15 @@
 #define INCLUDE_H
 
 
-
-#include "iostream"
-#include "string"
+// 라이브러리 포함
+#include <string>
 #include <iostream>
 #include <algorithm>
 
-
+// 헤더 파일 포함
 #include "avltree.h"
 #include "utility.h"
-
+#include "set.h"
 
 
 using namespace std;

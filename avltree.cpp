@@ -31,250 +31,266 @@
 #include "include.h"
 
 
-AVLTree::AVLTree() :root_(nullptr)
+AVLTree::AVLTree() : root_(nullptr), size_(0) {};	// AVLTree 기본 생성자: 루트를 nullptr로 초기화하고 트리의 크기를 0으로 설정합니다.
+
+AVLTree::~AVLTree() {};					// AVLTree 소멸자: 리소스를 정리합니다.	
+
+void AVLTree::Insert(int key) 				// 키를 트리에 삽입하는 함수
 {
-}
-
-AVLTree::~AVLTree()
-{
-}
-
-void AVLTree::Insert(int key) { root_ = InsertNode(root_, key); };
-
-bool AVLTree::Empty()
-{
-	return root_ == nullptr;
-};
-
-int AVLTree::Size()
-{
-	Utility util;
-	return util.GetSize(root_);
-};
-
-int AVLTree::Height(int key)
-{
-        Utility util;
-	AVLNode* node = util.FindNode(root_, key);
-	if (node == nullptr)
-		return -1;
-	return node->height;
-};
-
-void AVLTree::Ancestor(int key) 
-{
-        Utility util;
-	AVLNode* target_node = util.FindNode(root_, key);  // 타겟 노드 설정
-
-	int height = target_node->height - 1;
-        int depth = util.GetDepth(root_, key, 0);
-        int K = height + depth;      // 타겟 노드의 높이와 깊이의 합
-
-        if (target_node == root_)    // 타겟 노드가 루트일 경우 "K 0" 출력
-        {
-                std::cout << K << " 0" << "\n";
-                return;
-        }
+	Utility util;					// 유틸리티 객체 생성
 	
-        int sum = 0;  
-        AVLNode* current_node = root_;
-	while (current_node->key != key)      // 타켓 노드에 도달할 때까지 루트부터 탐색   
+	root_ = InsertNode(root_, key);		 	// InsertNode 함수를 사용하여 노드를 삽입하고 균형을 맞추며 루트를 갱신
+	size_++;					// 트리의 크기 증가
+	AVLNode* find_node = util.FindNode(root_, key);	// 삽입된 노드를 다시 찾기
+	cout << util.GetHeight(find_node) + util.GetDepth(root_, key, 0) << "\n";	// 삽입된 노드의 높이와 깊이 합 출력
+};
+
+void AVLTree::Empty()	// 트리가 비어있는지 확인하는 함수
+{
+	if (root_ == nullptr)
 	{
-	        sum += current_node->key;     // 조상 노드의 키 값을 합산
-		if (key < current_node->key) 
-                {
-		        current_node = current_node->left;  // 키 값이 작으면 왼쪽 자식으로 이동
-	        }
-	        else 
-                {
-		        current_node = current_node->right; // 키 값이 크면 오른쪽 자식으로 이동
-		}
-        }
+		cout << 1 << "\n";	// 루트가 nullptr이면 트리가 비어있음을 의미하므로 1 출력
+	}
+	else 	 
+	{
+		cout << 0 << "\n";	// 트리가 비어있지 않으면 0 출력
+	}
+};
 
-        std::cout << K << " " << sum << "\n"; // K 값과 조상 노드들의 키 값의 합을 출력  
+void AVLTree::Size() const	// 트리의 노드 개수(크기)를 출력하는 함수
+{
+	cout << size_ << "\n";  // 트리의 노드 수인 size_를 출력
+};
+
+void AVLTree::Height()	// 트리의 높이를 출력하는 함수
+{
+	if (root_ == nullptr)
+	{
+		cout << -1 << "\n";			// 루트가 nullptr이면 트리가 비어있으므로 높이는 -1
+	}
+	else 
+	{
+		cout << root_->height << "\n";	// 루트 노드의 높이를 출력
+	}
+};
+
+void AVLTree::Ancestor(int key)	// 특정 키에 대한 조상 노드의 합을 계산하고 출력하는 함수
+{
+	Utility util;						// 유틸리티 객체 생성
+	AVLNode* current_node = util.FindNode(root_, key);	// 키에 해당하는 노드 찾기
 	
+	if (current_node == root_)				// 노드가 루트일 경우
+	{
+		cout << util.GetHeight(current_node) + util.GetDepth(root_, key, 0) << " " << 0 << "\n";	// 루트 노드는 조상이 없으므로 0 출력
+		return;
+	}
+
+	int sum = 0;						// 조상 노드 키의 합을 저장할 변수
+	AVLNode* ancestor_node = root_;				// 루트에서 시작
+	while (ancestor_node != current_node) 			// 조상 노드를 따라가며 합을 계산
+	{
+		sum += ancestor_node->key;			// 현재 노드의 키를 합에 더함
+		if (ancestor_node->key > key) 
+		{
+			ancestor_node = ancestor_node->left;	// 왼쪽 서브트리로 이동
+		}
+		else 
+		{
+			ancestor_node = ancestor_node->right;	// 오른쪽 서브트리로 이동
+		}
+	}
+	cout << util.GetHeight(current_node) + util.GetDepth(root_, key, 0) << " " << sum << "\n";	// 노드의 높이와 깊이, 조상 노드 키의 합을 출력
 };
 
-void AVLTree::Average(int key)
+void AVLTree::Average(int key)	// 특정 키를 기준으로 서브트리의 최소, 최대 값을 구하고 평균을 출력하는 함수
 {
-	Utility util;
-	AVLNode* subtree_root = util.FindNode(root_, key);  //입력 받은 키 값의 노드 찾기
+	Utility util;							// 유틸리티 객체 생성
+	AVLNode* subtree_root = util.FindNode(root_, key);		//입력 받은 키 값의 노드 찾기
 
-	int min_value_key = util.MinValueNode(subtree_root)->key;  //노드를 기준으로한 서브트리의 최소노드
-	int max_value_key = util.MaxValueNode(subtree_root)->key;  //노드를 기준으로한 서브트리의 최대노드
+	int min_value_key = util.MinValueNode(subtree_root)->key;	//노드를 기준으로한 서브트리의 최소노드
+	int max_value_key = util.MaxValueNode(subtree_root)->key;	//노드를 기준으로한 서브트리의 최대노드
 
-	double subtree_min_max_average = (static_cast<double>(min_value_key) + static_cast<double>(max_value_key)) / 2.0;			//최대와 최소의 산술평균
-	cout << subtree_min_max_average << "\n";
+	int average = (min_value_key + max_value_key) / 2.0;		// 최소값과 최대값의 평균을 계산
+	cout << average << "\n";					// 평균을 출력
 };
 
-void AVLTree::Rank(int key)
+void AVLTree::Rank(int key)	// 노드의 순위를 계산하여 출력하는 함수
 {
-	Utility util;
-	AVLNode* node = util.FindNode(root_, key);
+	Utility util;					// 유틸리티 객체 생성
+	AVLNode* node = util.FindNode(root_, key);	// 키에 해당하는 노드를 찾기
 
 
-		if (node == nullptr) 
-	{ 
-		cout << 0 << endl;  //노드를 찾을 수 없으면 "0"을 인쇄하고 기능을 완료한다.
+	if (node == nullptr)
+	{
+		cout << 0 << "\n";			// 노드가 존재하지 않으면 0 출력
 	}
 	else
 	{
-		int height = Height(key) - 1; 		  //`key` 키를 사용하여 노드의 높이를 계산한다. 높이를 올바른 논리로 가져오려면 1을 뺍니다(루트의 높이가 1인 경우).
-		int depth = util.GetDepth(root_, key, 0); //노드의 깊이를 계산한다. 우리는 `GetDepth` 메소드를 사용한다. 이 메소드는 루트에서 주어진 키를 가진 노드까지의 레벨 수를 반환한다.
-		int rank = util.RankNode(root_, key) + 1; //`RankNode` 메서드를 사용하여 키 `key`를 가진 노드의 랭크를 계산한다. "0" 대신 "1"로 시작하는 랭크를 얻으려면 1을 더한다.
-		int sumHD = height + depth; 		  //전체 측정항목을 얻기 위해 노드의 높이와 깊이를 합산한다.
+		cout << util.GetDepth(root_, key, 0) + util.GetHeight(node) << " " << util.RankNode(root_, key) + 1 << "\n";	// 노드의 깊이, 높이 합과 순위를 출력
+	}
+};
+
+void AVLTree::Erase(int key)	// 특정 키를 삭제하는 함수
+{
+	Utility util;					// 유틸리티 객체 생성
+	AVLNode* node = util.FindNode(root_, key);	// 키에 해당하는 노드를 찾기
 	
-		cout << sumHD << " " << rank  << "\n";    //결과를 출력한다
-	}
-};
-
-void AVLTree::Erase(int key)
-{
-	Utility util;
-	AVLNode* node = util.FindNode(root_, key);
-	if (node == nullptr) { cout << 0 << "\n"; }
-	else {
-		Find(key);
-		DeleteNode(root_, key);
-	}
-};
-
-void AVLTree::Find(int key)
-{
-	Utility util;
-	AVLNode* node = util.FindNode(root_, key);
-	if (node == nullptr) { cout << 0 << "\n"; }
-	else {
-		int height = node->height - 1;
-		int depth = util.GetDepth(root_, key, 0);
-		cout << "Find: " << key << " Height: " << height << ", Depth: " << depth << "\n";
-	}
-
-};
-
-AVLNode* AVLTree::DeleteNode(AVLNode* root, int key)
-{
-	Utility util;
-	AVLNode* node = util.FindNode(root_, key);
-
-	if (!root)
+	if (node == nullptr) 
 	{
-		return root;
+		cout << "0" << "\n";			// 노드가 존재하지 않으면 0 출력
+		return;
 	}
+	cout << util.GetHeight(node) + util.GetDepth(root_, key, 0) << "\n";	// 노드의 높이와 깊이 출력
+	root_ = DeleteNode(root_, key);			// DeleteNode 함수를 사용하여 노드 삭제 후 루트 갱신
+	size_--;					// 트리 크기 감소
+};
 
-	if (key < root->key)
+void AVLTree::Find(int key)	// 주어진 키를 가진 노드를 찾고 깊이와 높이를 출력하는 함수
+{
+	Utility util;					// 유틸리티 객체 생성
+	AVLNode* find_node = util.FindNode(root_, key);	// 유틸리티의 FindNode 함수를 사용하여 키에 해당하는 노드 찾기
+	
+	if (find_node == nullptr) 
+	{
+		cout << 0 << "\n";			// 노드가 존재하지 않으면 0 출력
+	}
+	else 
+	{
+		cout << find_node->height + util.GetDepth(root_, key, 0) << "\n";	// 노드가 존재하면 높이와 깊이의 합을 출력
+	}
+};
+
+AVLNode* AVLTree::DeleteNode(AVLNode* root, int key)	// AVL 트리에서 특정 키를 삭제하는 함수 (재귀적 구현)
+{
+	Utility util;		 	// 유틸리티 객체 생성
+	
+	if (!root)		 	// 베이스 케이스: 루트가 nullptr이면 아무 작업도 하지 않고 nullptr 반환
+	{
+		return nullptr;
+	}
+	
+	if (key < root->key)	 	// 삭제하려는 키가 현재 노드의 키보다 작으면 왼쪽 서브트리로 이동
 	{
 		root->left = DeleteNode(root->left, key);
 	}
-	else if (key > root->key)
+	else if (key > root->key)	// 삭제하려는 키가 현재 노드의 키보다 크면 오른쪽 서브트리로 이동
 	{
 		root->right = DeleteNode(root->right, key);
 	}
-	else
+	else				// 삭제하려는 키를 찾은 경우 (key == root->key)
 	{
-		if (!root->left || !root->right)
+		if (!root->left || !root->right)	자식 노드가 하나이거나 없는 경우
 		{
-			AVLNode* temp = root->left ? root->left : root->right;
-			if (!temp)
+			AVLNode* temp = root->left ? root->left : root->right;	// 자식 노드 중 하나만 존재하면 그 자식을 temp에 저장
+			if (!temp)						// 자식 노드가 없을 경우 (temp == nullptr)
+			{
+				temp = root;					// 현재 노드를 temp로 설정한 후 root를 nullptr로 설정
 				root = nullptr;
+			}
 			else
-				*root = *temp;
-			delete temp;
+			{
+				*root = *temp;					// 자식 노드가 하나 있을 경우: 현재 노드의 값을 자식 노드 값으로 복사
+			}
+			delete temp;						// temp 노드를 삭제
 		}
 		else
 		{
-		        AVLNode* temp = util.MinValueNode(root->right);
-			root->key = temp->key;
-			root->right = DeleteNode(root->right, temp->key);
+			AVLNode* temp = root->right;				// 오른쪽 서브트리에서 최소값 노드를 찾기
+			while (temp->left)
+				temp = temp->left;
+	
+			root->key = temp->key;					// 현재 노드의 키를 오른쪽 서브트리의 최소값 노드의 키로 교체
+			root->right = DeleteNode(root->right, temp->key);	// 오른쪽 서브트리에서 최소값 노드를 삭제
 		}
-
-		if (!root)
-		{
-			return root;
-		}
-
-		root->height = util.UpdateHeight(root);
-		root->size = util.GetSize(root);
-
-		int balance = util.GetBalance(root);
-
-		if (balance > 1 && util.GetBalance(root->left) >= 0)
-		{
-			return util.RightRotate(root);
-		}
-
-		if (balance > 1 && util.GetBalance(root->left) < 0)
-		{
-			root->left = util.LeftRotate(root->left);
-			return util.RightRotate(root);
-		}
-
-		if (balance < -1 && util.GetBalance(root->right) <= 0)
-		{
-			return util.LeftRotate(root);
-		}
-
-		if (balance < -1 && util.GetBalance(root->right) > 0)
-		{
-			root->right = util.RightRotate(root->right);
-			return util.LeftRotate(root);
-		}
-
-		return root;
 	}
+	
+	if (!root)								// 삭제 후 노드가 nullptr이면 반환
+	{
+		return nullptr;
+	}
+	
+	
+										// 높이와 서브트리 크기 업데이트
+	root->height = util.UpdateHeight(root);
+	root->ranksize = util.UpdateRankSize(root);
+
+										// 불균형 확인 및 회전 수행
+	int balance = util.GetBalance(root);
+	
+	if (balance > 1 && util.GetBalance(root->left) >= 0) {
+		return util.RightRotate(root);
+	}
+	if (balance > 1 && util.GetBalance(root->left) < 0) {
+		root->left = util.LeftRotate(root->left);
+		return util.RightRotate(root);
+	}
+	if (balance < -1 && util.GetBalance(root->right) <= 0) {
+		return util.LeftRotate(root);
+	}
+	if (balance < -1 && util.GetBalance(root->right) > 0) {
+		root->right = util.RightRotate(root->right);
+		return util.LeftRotate(root);
+	}
+	
+	
+	
+	return root;
 };
 
-AVLNode* AVLTree::InsertNode(AVLNode* node, int key)
+AVLNode* AVLTree::InsertNode(AVLNode* root, int key)		// AVL 트리에 키를 삽입하는 함수(재귀적으로 동작)
 {
 
 	Utility util;
-
-
-	if (!node)
+	
+	
+	if (root == nullptr)
 	{
-		return new AVLNode(key);
+		return new AVLNode(key);		// 노드가 nullptr이면 새 노드 생성
 	}
-
-	if (key < node->key)
+	
+	if (key < root->key)				// 키를 비교하여 왼쪽 또는 오른쪽으로 이동
 	{
-		node->left = InsertNode(node->left, key);
+		root->left = InsertNode(root->left, key);	
 	}
-	else if (key > node->key)
+	else if (key > root->key)
 	{
-		node->right = InsertNode(node->right, key);
+		root->right = InsertNode(root->right, key);
 	}
 	else
 	{
-		return node;
+		return root;				// 중복 키를 허용하지 않음
 	}
+	
+	
+							// 높이와 서브트리 크기 업데이트
+	root->height = util.UpdateHeight(root);
+	root->ranksize = util.UpdateRankSize(root);
 
-	node->height = util.UpdateHeight(node);
-	node->size = util.UpdateSize(node);
-
-	int balance = util.GetBalance(node);
-
-	if (balance > 1 && key < node->left->key)
+							// 불균형 확인 및 회전 수행
+	int balance = util.GetBalance(root);
+	
+	if (balance > 1 && key < root->left->key)
 	{
-		return util.RightRotate(node);
+		return util.RightRotate(root);
 	}
-
-	if (balance < -1 && key > node->right->key)
+	
+	if (balance < -1 && key > root->right->key)
 	{
-		return util.LeftRotate(node);
+		return util.LeftRotate(root);
 	}
-
-	if (balance > 1 && key > node->left->key)
+	
+	if (balance > 1 && key > root->left->key)
 	{
-		node->left = util.LeftRotate(node->left);
-		return util.RightRotate(node);
+		root->left = util.LeftRotate(root->left);
+		return util.RightRotate(root);
 	}
-
-	if (balance < -1 && key < node->right->key)
+	
+	if (balance < -1 && key < root->right->key)
 	{
-		node->right = util.RightRotate(node->right);
-		return util.LeftRotate(node);
+		root->right = util.RightRotate(root->right);
+		return util.LeftRotate(root);
 	}
-
-	return node;
+	
+	return root;
 };
 
