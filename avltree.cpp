@@ -212,7 +212,7 @@ AVLNode* AVLTree::DeleteNode(AVLNode* root, int key)	// AVL 트리에서 특정 
 	
 										// 높이와 서브트리 크기 업데이트
 	root->height = util.UpdateHeight(root);
-	root->size = util.UpdateRankSize(root);
+	root->ranksize = util.UpdateRankSize(root);
 
 										// 불균형 확인 및 회전 수행
 	int balance = util.GetBalance(root);
@@ -264,7 +264,7 @@ AVLNode* AVLTree::InsertNode(AVLNode* root, int key)		// AVL 트리에 키를 �
 	
 							// 높이와 서브트리 크기 업데이트
 	root->height = util.UpdateHeight(root);
-	root->size = util.UpdateRankSize(root);
+	root->ranksize = util.UpdateRankSize(root);
 
 							// 불균형 확인 및 회전 수행
 	int balance = util.GetBalance(root);
