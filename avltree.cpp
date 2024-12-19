@@ -70,7 +70,7 @@ void AVLTree::Height()	// 트리의 높이를 출력하는 함수
 	}
 	else 
 	{
-		cout << root_->Height() << "\n";	// 루트 노드의 높이를 출력
+		cout << root_->height << "\n";	// 루트 노드의 높이를 출력
 	}
 };
 
