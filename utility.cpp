@@ -70,7 +70,7 @@ int Utility::GetRankSize(AVLNode* node)	// GetRankSize 함수: 특정 노드를 
 	}
 	else
 	{
-		return node->size;	// 노드가 nullptr이 아니면 서브트리 크기 반환
+		return node->ranksize;	// 노드가 nullptr이 아니면 서브트리 크기 반환
 	}
 };
 
@@ -85,7 +85,7 @@ int Utility::UpdateRankSize(AVLNode* node)	// UpdateRankSize 함수: 주어진 �
 	{
 		return 0;			// 노드가 nullptr이면 서브트리 크기는 0
 	}
-	return 1 + GetSize(node->left) + GetSize(node->right);  // 서브트리의 크기 = 1 (자기 자신) + 왼쪽 서브트리 크기 + 오른쪽 서브트리 크기
+	return 1 + GetRankSize(node->left) + GetRankSize(node->right);  // 서브트리의 크기 = 1 (자기 자신) + 왼쪽 서브트리 크기 + 오른쪽 서브트리 크기
 };
 
 int Utility::GetBalance(AVLNode* node)	// GetBalance 함수: 노드의 균형 인덱스를 계산하여 반환
@@ -153,8 +153,8 @@ AVLNode* Utility::LeftRotate(AVLNode* x)	// LeftRotate 함수: 오른쪽 자식�
 	y->height = UpdateHeight(y);
 
 	// 크기 갱신
-	x->size = UpdateRankSize(x);
-	y->size = UpdateRankSize(y);
+	x->ranksize = UpdateRankSize(x);
+	y->ranksize = UpdateRankSize(y);
 
 	return y;  // 새로운 루트 반환
 }
@@ -175,8 +175,8 @@ AVLNode* Utility::RightRotate(AVLNode* y)	// RightRotate 함수: 왼쪽 자식�
 	x->height = UpdateHeight(x);
 
 	// 크기 갱신
-	y->size = UpdateRankSize(y);
-	x->size = UpdateRankSize(x);
+	y->ranksize = UpdateRankSize(y);
+	x->ranksize = UpdateRankSize(x);
 
 
 	return x;  // 새로운 루트 반환
