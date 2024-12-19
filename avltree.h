@@ -38,7 +38,7 @@ struct AVLNode 	// AVL 트리의 노드를 나타내는 구조체
 	AVLNode* left;		// 왼쪽 자식 노드를 가리키는 포인터
 	AVLNode* right;		// 오른쪽 자식 노드를 가리키는 포인터
 	int height;		// 노드의 높이를 저장 (균형 검사 시 사용)
-	int size;		// 서브트리의 노드 개수를 저장 (Rank 계산 시 사용)
+	int ranksize;		// 서브트리의 노드 개수를 저장 (Rank 계산 시 사용)
 
 	int Height() 		// 현재 노드의 높이를 반환하는 멤버 함수
 	{
@@ -47,7 +47,7 @@ struct AVLNode 	// AVL 트리의 노드를 나타내는 구조체
 
 	// 생성자: 키 값을 받아 노드를 초기화
     	// 왼쪽과 오른쪽 자식은 nullptr, 높이와 서브트리 크기는 1로 초기화
-	AVLNode(int k) : key(k), left(nullptr), right(nullptr), height(1), size(1) {};
+	AVLNode(int k) : key(k), left(nullptr), right(nullptr), height(1), ranksize(1) {};
 };
 
 
