@@ -156,7 +156,7 @@ void AVLTree::Find(int key)	// 주어진 키를 가진 노드를 찾고 깊이�
 	}
 	else 
 	{
-		cout << find_node->Height() + util.GetDepth(root_, key, 0) << "\n";	// 노드가 존재하면 높이와 깊이의 합을 출력
+		cout << find_node->height + util.GetDepth(root_, key, 0) << "\n";	// 노드가 존재하면 높이와 깊이의 합을 출력
 	}
 };
 
